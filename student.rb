@@ -1,11 +1,12 @@
-require_relative 'person'
-class Student < Person
-    def initialize(name = "Unknown", age, permission = true, classroom)
-        super(name, age, permission)
-        @classroom = class
-    end
+require 'person'
 
-    def play_hooky
-      puts  '¯\(ツ)/¯'
-    end
+class Student < Person
+  def initialize(age, classroom, name = 'Unknown', permission: true)
+    super(name, age, permission)
+    @classroom = classroom
+  end
+
+  def play_hooky
+    puts '¯\(ツ)/¯'
+  end
 end
