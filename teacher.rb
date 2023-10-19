@@ -9,8 +9,4 @@ class Teacher < Person
   def can_use_services?
     true
   end
-
-  def play_hooky
-    puts '¯\(ツ)/¯'
-  end
 end

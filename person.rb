@@ -7,7 +7,6 @@ class Person
   end
 
   attr_reader :id
-
   attr_accessor :name, :age
 
   def can_use_services?
