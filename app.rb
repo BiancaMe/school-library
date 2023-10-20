@@ -42,9 +42,7 @@ class App
 
   def create_student(age, classroom, name, option)
     permission = false
-    if (option == 'y' || option == 'Y')
-        permission = true
-    end
+    permission = true if %w[y Y].include?(option)
     student = Student.new(age, classroom, name, permission)
     @people << student
     puts 'Student created successfully'
