@@ -14,28 +14,28 @@ class App
 
   def list_books
     if @books.empty?
-      print 'There are no registered books'
+      puts 'There are no registered books'
     else
-      print 'Books:'
+      puts 'Books:'
       @books.each do |book|
-        print "Title: #{book.title}, Author: #{book.author}"
+        puts "Title: #{book.title}, Author: #{book.author}"
       end
     end
   end
 
   def list_people
     if @people.empty?
-      print 'There are no registered people'
+      puts 'There are no registered people'
     else
-      print 'People:'
+      puts 'People:'
       @people.each do |person|
-        print "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+        puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
     end
   end
 
   def create_teacher(age, specialization, name)
-    teacher = Teacher.new(age, specialization, name)
+    teacher = Teacher.new(age, specialization, name: name)
     @people << teacher
     puts 'Teacher created successfully'
   end
@@ -43,7 +43,7 @@ class App
   def create_student(age, classroom, name, option)
     permission = false
     permission = true if %w[y Y].include?(option)
-    student = Student.new(age, classroom, name, permission)
+    student = Student.new(age, classroom, name: name, parent_permission: permission)
     @people << student
     puts 'Student created successfully'
   end
@@ -61,13 +61,18 @@ class App
   end
 
   def specific_rental(id)
-    res = []
-    @rentals.each do |rental|
-      res << rental if rental.person.id == id
+    find = false
+    @people.each do |person|
+      next unless person.id == id
+
+      find = true
+      rentals.each do |rental|
+        puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}" if rental.person.id == id
+      end
     end
-    puts 'Rentals: '
-    res.each do |rental|
-      puts "Date: #{rental.date}, Book: #{rental.book.title}, Person: #{rental.book.author}"
-    end
+
+    return if find
+
+    puts 'Not found'
   end
 end

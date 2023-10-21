@@ -6,6 +6,7 @@ class Main
   end
 
   def menu
+    puts ''
     puts '
   ███████████████████████████████████████████████████████████████████████████
   █─▄▄▄▄█─▄▄▄─█─█─█─▄▄─█─▄▄─█▄─▄█████▄─▄███▄─▄█▄─▄─▀█▄─▄▄▀██▀▄─██▄─▄▄▀█▄─█─▄█
@@ -80,7 +81,7 @@ class Main
       puts "#{i}) Title: #{book.title}, Author #{book.author}"
     end
     book = gets.chomp.to_i
-    @app.people[book]
+    @app.books[book]
   end
 
   def select_person
@@ -100,24 +101,30 @@ class Main
       person = select_person
       puts 'Date: '
       date = gets.chomp
-      create_rental(date, book, person)
+      @app.create_rental(date, book, person)
     end
   end
 
   def show_rental
     puts 'ID of person: '
     id = gets.chomp.to_i
-    specific_rental(id)
+    @app.specific_rental(id)
   end
 
   def main_menu
     menu
-    option = gets.chomp.to_i
-    if option >= 1 && option < 8
-      choose_option(option)
-      menu unless option == 7
-    else
-      puts 'The option is not valid'
+    loop do
+      option = gets.chomp.to_i
+      if option >= 1 && option < 8
+        choose_option(option)
+        if option == 7
+          exit
+        else
+          menu
+        end
+      else
+        puts 'The option is not valid'
+      end
     end
   end
 end
