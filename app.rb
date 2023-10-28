@@ -50,7 +50,7 @@ class App
 
   def create_book(title, author)
     book = Book.new(title, author)
-    @books << book
+    @people << book
     puts 'Book created successfully'
   end
 
